@@ -7,6 +7,6 @@ Information about the scripts I have written. I have deveploped interest in web 
 
 ==>> real_Madrid_Schedule.py - Displays the next Madrid match info.
 
-==>> weather.py - Shows the temperature of particular city.
+==>> weather.py - Shows the temperature of particular city.Uses openweathermap API.
 
 
