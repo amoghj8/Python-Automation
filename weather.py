@@ -1,0 +1,31 @@
+#! /usr/bin/python3
+
+import requests
+import json
+import sys
+import gi
+gi.require_version('Notify','0.7')
+from gi.repository import Notify,GdkPixbuf
+
+#Temperature of entered place
+place = sys.argv[1]
+token = 'Enter your api key'
+url = 'http://api.openweathermap.org/data/2.5/weather?q='+place+'&APPID='+token
+res = requests.get(url)
+weatherData = json.loads(res.text)
+print('The temperature of '+place.capitalize()+ ' is : '+str(round((weatherData['main']['temp']-273.15),3))+' degrees')
+print('Humidity : '+str(weatherData['main']['humidity'])+'%')
+print('State : '+weatherData['weather'][0]['description'].capitalize())
+
+#Details of my current location
+place = 'mysore'
+url = 'http://api.openweathermap.org/data/2.5/weather?q='+place+'&APPID='+token
+res = requests.get(url)
+weatherData = json.loads(res.text)
+
+#Notification
+Notify.init('Weather')
+ntf = Notify.Notification.new('Mysore','Temperature : '+str(round((weatherData['main']['temp']-273.15),3))+' degrees'+'\n'+'Humidity : '+str(weatherData['main']['humidity'])+'%'+'\n'+'State :'+weatherData['weather'][0]['description'].capitalize())
+image = GdkPixbuf.Pixbuf.new_from_file('./Desktop/Python Stuff/Scraping/weather-icon.jpg')
+ntf.set_image_from_pixbuf(image)
+ntf.show()
