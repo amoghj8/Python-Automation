@@ -5,7 +5,7 @@ Information about the scripts I have written. I have deveploped interest in web 
 
 ==>> barcelona_schedule.py  - This sends a notification regarding FCB's match details and also mobile notification.
 
-==>> readl_Madrid_Schedule.py  - This sends a notification regarding RMCF's match details and also mobile notification.
+==>> real_Madrid_Schedule.py  - This sends a notification regarding RMCF's match details and also mobile notification.
 
 ==>> weather.py - Shows the temperature of particular city.Uses openweathermap API.
 
