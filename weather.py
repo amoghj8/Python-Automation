@@ -8,14 +8,19 @@ gi.require_version('Notify','0.7')
 from gi.repository import Notify,GdkPixbuf
 
 #Temperature of entered place
-place = sys.argv[1]
-token = 'Enter your api key'
-url = 'http://api.openweathermap.org/data/2.5/weather?q='+place+'&APPID='+token
-res = requests.get(url)
-weatherData = json.loads(res.text)
-print('The temperature of '+place.capitalize()+ ' is : '+str(round((weatherData['main']['temp']-273.15),3))+' degrees')
-print('Humidity : '+str(weatherData['main']['humidity'])+'%')
-print('State : '+weatherData['weather'][0]['description'].capitalize())
+place = ''.join(sys.argv[1])
+try:
+    token = 'Enter your api key'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q='+place+'&APPID='+token
+    res = requests.get(url)
+    weatherData = json.loads(res.text)
+    print('The temperature of '+place.capitalize()+ ' is : '+str(round((weatherData['main']['temp']-273.15),3))+' degrees')
+    print('Humidity : '+str(weatherData['main']['humidity'])+'%')
+    print('State : '+weatherData['weather'][0]['description'].capitalize())
+
+except IndexError:
+    print('\n'+'Its like this :'+'\n'+'\n'+' ./Desktop/Python\ Stuff/Scraping/weather.py add_desired_location_here'+'\n')
+    token = 'Enter token here'
 
 #Details of my current location
 place = 'mysore'
