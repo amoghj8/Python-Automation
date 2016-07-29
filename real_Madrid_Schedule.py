@@ -6,6 +6,7 @@ gi.require_version('Notify','0.7')
 from gi.repository import Notify,GdkPixbuf
 import datetime
 import twilio
+from twilio.rest import TwilioRestClient
 
 res = requests.get('http://realmadrid.com/en')
 bs_Obj = BeautifulSoup(res.text,'lxml')
@@ -42,14 +43,19 @@ else:
     nf.close()
     
 #Mobile Notification 
-from twilio.rest import TwilioRestClient
 time_1 = mist+mft
 time_2 = datetime.datetime.now()
-if((time_1-time_2).days==1):
-    account_sid =  "ACC_SID"
-    auth_token = "TOKEN"
+if((time_1-time_2).days<=1):
+    account_sid =  "Enter your sid"
+    auth_token = "Enter your token"
     client = TwilioRestClient(account_sid, auth_token)     
-    message = client.messages.create(body="Matchday :"+'\n'+competition+'\n'+teamA+' vs '+teamB+'\n'+'Kickoff on '+str(mist + mft),
-    to="+NO.1",    # Replace with your phone number
-    from_="+NO.2") # Replace with your Twilio number
-    print(message.sid)
+    if(competition == 'TRAINING SESSION'):
+        message = client.messages.create(body=competition+'\n'+final_match_date_and_time,
+        to="Replace with your phone number"
+        from_="Replace with your Twilio number"
+        print(message.sid)
+    else: 
+        message = client.messages.create(body="Matchday :"+'\n'+competition+'\n'+teamA+' vs '+teamB+'\n'+'Kickoff on '+str(mist + mft),
+        to="Replace with your phone number"
+        from_="Replace with your Twilio number"
+        print(message.sid)
