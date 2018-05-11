@@ -4,6 +4,7 @@ import requests,gi.repository
 from bs4 import BeautifulSoup
 gi.require_version('Notify','0.7')
 from gi.repository import Notify,GdkPixbuf
+import pyttsx3
 
 res = requests.get('http://www.merriam-webster.com/word-of-the-day')
 bs_Obj = BeautifulSoup(res.text,'lxml')
@@ -28,6 +29,12 @@ image = GdkPixbuf.Pixbuf.new_from_file('./Desktop/Python Stuff/Scraping/MW_logo.
 nf.set_image_from_pixbuf(image)
 nf.show()
 
+#Text to Speech
+engine = pyttsx3.init()
+engine.say(word_of_the_day)
+engine.setProperty('rate',80)  #80 words per minute
+engine.setProperty('volume',0.9) 
+engine.runAndWait()
 #Writing into a file
 
 file = open('./Desktop/Python Stuff/Scraping/words_List.text','a')
